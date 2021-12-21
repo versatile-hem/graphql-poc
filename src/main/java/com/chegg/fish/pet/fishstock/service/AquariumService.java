@@ -139,7 +139,7 @@ public class AquariumService {
 		return environment -> {
 			var aquarium = aquariumRepository.findById(environment.getArgument("id"))
 					.orElseThrow(RuntimeException::new);
-			final Action action = Action.valueOf(environment.getArgument("action"));
+			final var action = Action.valueOf(environment.getArgument("action"));
 			var mapper = new ObjectMapper();
 			List<FishInput> afList = mapper.convertValue(environment.getArgument("fishes"),
 					new TypeReference<List<FishInput>>() {
@@ -178,9 +178,7 @@ public class AquariumService {
 			throw new FishException(FishExceptionCode.CAN_NOT_FIT_FISH);
 		}
 		log.info("fish param : {}", fish);
-		if (optional.isPresent()) {
-		//	List<Integer> dangerous = fish.getDangerFishes().stream().flatMap(fs -> Stream.of(fs.getId()))
-		//			.collect(Collectors.toList());
+		if (optional.isPresent()) { 
 			log.info("Validating if any dangerous fish in acqu...");
 			aquarium.getFishes().forEach(af -> {
 				if (fish.getDangerFishes().contains(af.getFish())) {

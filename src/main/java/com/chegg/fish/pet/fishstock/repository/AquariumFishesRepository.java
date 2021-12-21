@@ -15,7 +15,7 @@ public interface AquariumFishesRepository extends JpaRepository<AquariumFishes, 
 	@Transactional
 	@Modifying
 	@Query(nativeQuery = true, value = "UPDATE chegg.aquarium_fishes set fish_count=fish_count + ?1 WHERE aquarium_id=?2 and fish_id=?3")
-	void addFishes(int no,int aid, int fid);
+	void addFishes(int no, int aid, int fid);
 
 	@Transactional
 	@Modifying
@@ -24,7 +24,5 @@ public interface AquariumFishesRepository extends JpaRepository<AquariumFishes, 
 
 	@Query(nativeQuery = true, value = "Select * from chegg.aquarium_fishes WHERE aquarium_id=?1 and fish_id =?2")
 	Optional<AquariumFishes> findByAquariumIdAndFishId(int aid, int fid);
-	
-	
 
 }

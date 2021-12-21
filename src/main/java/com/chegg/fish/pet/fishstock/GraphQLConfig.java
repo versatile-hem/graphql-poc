@@ -1,6 +1,5 @@
 package com.chegg.fish.pet.fishstock;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,11 +25,9 @@ import com.chegg.fish.pet.fishstock.repository.FishRepository;
 import com.chegg.fish.pet.fishstock.service.AquariumService;
 
 import graphql.GraphQL;
-import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
-import graphql.schema.idl.TypeDefinitionRegistry;
 
 /**
  * 
@@ -56,20 +53,18 @@ public class GraphQLConfig {
 
 	@PostConstruct
 	private void loadSchema() throws IOException {
-
 		loadDataInHSQL();
-
-		File file = resource.getFile();
-		TypeDefinitionRegistry reg = new SchemaParser().parse(file);
-		RuntimeWiring wiring = buildRuntimeWiring();
-		GraphQLSchema graphQLSchema = new SchemaGenerator().makeExecutableSchema(reg, wiring);
+		var file = resource.getFile();
+		var reg = new SchemaParser().parse(file);
+		var wiring = buildRuntimeWiring();
+		var graphQLSchema = new SchemaGenerator().makeExecutableSchema(reg, wiring);
 		graphQl = GraphQL.newGraphQL(graphQLSchema).build();
 
 	}
 
 	private void loadDataInHSQL() {
-		Set<FishMaster> fishes = new HashSet<FishMaster>();
-		FishMaster fishM = new FishMaster(1, FishSpecies.GOLDFISH, FishColor.indigo, 2, null, null);
+		Set<FishMaster> fishes = new HashSet<>();
+		var fishM = new FishMaster(1, FishSpecies.GOLDFISH, FishColor.indigo, 2, null, null);
 		fishes.add(fishM);
 		
 		
@@ -80,8 +75,8 @@ public class GraphQLConfig {
 					fishRepository.save(fs);
 				});
 
-		Set<AquariumFishes> fishes1 = new HashSet<AquariumFishes>();
-		AquariumFishes fish = new AquariumFishes();
+		Set<AquariumFishes> fishes1 = new HashSet<>();
+		var fish = new AquariumFishes();
 		fish.setFish(new FishMaster(1, FishSpecies.GOLDFISH, FishColor.indigo, 2,  null, null));
 		fish.setFishCount(12);
 		fishes1.add(fish);
@@ -96,6 +91,10 @@ public class GraphQLConfig {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	private RuntimeWiring buildRuntimeWiring() {
 
 		return RuntimeWiring.newRuntimeWiring()
