@@ -26,8 +26,8 @@ public class FishInventory {
 	private int id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fish_id", referencedColumnName = "id")
-	private Fish fish;
+	@JoinColumn(name = "fishId", referencedColumnName = "id")
+	private FishMaster fishMaster;
 	
 	private long available; 
 

@@ -6,4 +6,7 @@ import com.chegg.fish.pet.fishstock.model.Aquarium;
 
 public interface AquariumRepository extends JpaRepository<Aquarium, Integer> {
 
+	
+	
+	
 }

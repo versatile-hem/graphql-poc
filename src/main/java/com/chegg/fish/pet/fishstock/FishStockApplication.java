@@ -9,4 +9,6 @@ public class FishStockApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FishStockApplication.class, args);
 	}
+
+	 
 }

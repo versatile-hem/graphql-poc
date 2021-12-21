@@ -19,7 +19,7 @@ public class AquariumRestController {
 	
 	
 	@PostMapping
-	public ResponseEntity<Object> getAllAquariums(@RequestBody String query) {
+	public ResponseEntity<Object> executeAquaQuery(@RequestBody String query) {
 		var executionResult = graphQLService.getGraphQl().execute(query);
 		return new ResponseEntity<>(executionResult, HttpStatus.OK);
 	}

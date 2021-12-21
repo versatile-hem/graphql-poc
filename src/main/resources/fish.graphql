@@ -9,7 +9,20 @@ type Query{
 	aquarium(id: Int): Aquarium
 }
 type Mutation {
-	addFish(id: Int, glassType : String,volume : Float,volumeUnit : String,shape : String ): Aquarium
+	makeAquarium(
+		id: Int, 
+		glassType : String,
+		volume : Float,
+		volumeUnit : String,
+		shape : String  
+	): Aquarium
+	
+	updateFish(
+		id: Int, 
+		action : String ,
+		fishes : [FishInput]!
+	): Aquarium
+	 
 
 } 
 
@@ -21,14 +34,32 @@ type Fish {
 	available : Int
 }
 
+input FishInput {
+	fishId : Int
+	count : Int 
+}
+
+
 type Aquarium {
 	id: Int
 	glassType : String
 	volume : Float
 	volumeUnit : String
 	shape : String 
-	fishes : [Fish]!
+	fishes : [AquariumFishes]
 }
  
+  
+type AquariumFishes {
+	id: Int	
+	fishCount: Int  
+	fish: Fish!
+}  
+input AquariumFishesInput {
+	id: Int	
+	aquariumId : Int
+	fishId:Int
+	fishCount: Int  
+}  
   
  
